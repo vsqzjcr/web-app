@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form Design</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='login.css') }}">
+</head>
+<body>
+    <div class="loginbox">
+    <img src="/static/image/avatar.jpg" class="avatar">
+        <h1>Login Here</h1>
+        <form action="/index" method="POST">
+            <p>Username</p>
+            <input type="text" name="username" placeholder="Enter Username">
+            <p>Password</p>
+            <input type="password" name="password" placeholder="Enter Password">
+            <input type="submit" name="submit" value="Login"><br>
+            <a href="#">Lost your password?</a><br>
+            <a href="#">Dont have an account?</a><br>
+            <td width="10%" align="center"> <a href="/dashboard">Home</a></td>
+        </form>
+
+    </div>
+</body>
+</html>
