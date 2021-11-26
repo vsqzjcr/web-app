@@ -1,6 +1,7 @@
 from flask import Flask, url_for, redirect
 from flask import request
 from flask import render_template
+import sqlite3 as sql
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 app = Flask(__name__)
@@ -41,11 +42,27 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        username = request.form["username"]
+        password = request.form["password"]
+
+        con = sql.connect("user_data")
+        con.row_factory = sql.Row
+
+        cur = con.cursor()
+
+        cur.execute("select * from user where user_username ='{}' and user_password='{}';".format(username, password))
+
+        user = cur.fetchone()
+
+        if (user is None):
+            return render_template("login.html")
+        else:
+            if (len(user) > 0):
+                return redirect(url_for("dashboard"))
         # do stuff when the form is submitted
 
         # redirect to end the POST handling
         # the redirect can be to the same route or somewhere else
-        return redirect(url_for('index'))
 
     # show the form, it wasn't submitted
     return render_template('login.html')
